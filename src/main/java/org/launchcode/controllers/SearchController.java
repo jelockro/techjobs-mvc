@@ -27,10 +27,10 @@ public class SearchController {
     @RequestMapping(value ="results", method = RequestMethod.POST)
     public String results(Model model, @RequestParam String searchType, @RequestParam String searchTerm ) {
         ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(searchType, searchTerm);
-        model.addAttribute("title", searchType + ": " + searchTerm + ": " + "jobs");
+        Integer columnNumber = jobs.size();
+        model.addAttribute("title", columnNumber + " Result(s)");
         model.addAttribute("jobs", jobs);
         model.addAttribute("columns", ListController.columnChoices);
-        System.out.println(jobs);
         return "list-jobs";
     }
 
